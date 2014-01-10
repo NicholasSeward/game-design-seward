@@ -1,0 +1,12 @@
+-main ApplicationMain 
+-lib openfl
+-cp src
+-D tools=1.2.6
+-D web
+-swf-version 11.2
+-swf bin/flash/bin/SpaceInvaders.swf
+-swf-header 800:480:60:00FF00
+-cp bin/flash/haxe
+#--remap nme:flash
+--no-inline
+-debug
