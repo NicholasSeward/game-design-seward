@@ -36,12 +36,24 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		className.set ("img/bullet.jpg", __ASSET__img_bullet_jpg);
+		type.set ("img/bullet.jpg", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/bullet.png", __ASSET__img_bullet_png);
+		type.set ("img/bullet.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/kapow.png", __ASSET__img_kapow_png);
+		type.set ("img/kapow.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("img/squirrel.jpg", __ASSET__img_squirrel_jpg);
 		type.set ("img/squirrel.jpg", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		
 		#elseif html5
 		
+		path.set ("img/bullet.jpg", "img/bullet.jpg");
+		type.set ("img/bullet.jpg", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/bullet.png", "img/bullet.png");
+		type.set ("img/bullet.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/kapow.png", "img/kapow.png");
+		type.set ("img/kapow.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		path.set ("img/squirrel.jpg", "img/squirrel.jpg");
 		type.set ("img/squirrel.jpg", Reflect.field (AssetType, "image".toUpperCase ()));
 		
@@ -487,10 +499,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if pixi
 #elseif flash
 
+class __ASSET__img_bullet_jpg extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_bullet_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_kapow_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class __ASSET__img_squirrel_jpg extends flash.display.BitmapData { public function new () { super (0, 0); } }
 
 
 #elseif html5
+
+
+
 
 
 

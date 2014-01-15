@@ -23,6 +23,8 @@ class Main extends Sprite
 	var ship:Ship;
 	var leftDown:Bool;
 	var rightDown:Bool;
+	public static var game:Main;
+	public var bullets:List<Bullet>;
 
 	/* ENTRY POINT */
 	
@@ -52,20 +54,26 @@ class Main extends Sprite
 
 	public function new() 
 	{
-		super();	
+		super();
+		game = this;
+		bullets = new List<Bullet>();
 		addEventListener(Event.ADDED_TO_STAGE, added);
 		//Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, move);
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, processKey);
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, processUpKey);
 		Lib.current.stage.addEventListener(Event.ENTER_FRAME, doStuff);
-		ship = new Ship(50, 50);
+		ship = new Ship(400,400);
 		this.addChild(ship);
 	}
 	
 	function doStuff(e)
 	{
-		if (leftDown) ship.x -= 3;
-		if (rightDown) ship.x += 3;
+		if (leftDown) ship.left();
+		if (rightDown) ship.right();
+		
+		ship.act();
+		for (bullet in bullets) bullet.act();
+		trace(bullets.length);
 		
 	}
 	
@@ -74,6 +82,8 @@ class Main extends Sprite
 		trace(e.keyCode);
 		if (e.keyCode == 37) leftDown = true;
 		if (e.keyCode == 39) rightDown = true;
+		if (e.keyCode == 32) ship.shoot();
+		if (e.keyCode == 192) for (bullet in bullets) bullet.explode();
 	}
 	
 	function processUpKey(e:KeyboardEvent)
