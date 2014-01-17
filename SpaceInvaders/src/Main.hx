@@ -20,11 +20,13 @@ import openfl.Assets;
 class Main extends Sprite 
 {
 	var inited:Bool;
-	var ship:Ship;
+	public var ship:Ship;
 	var leftDown:Bool;
 	var rightDown:Bool;
 	public static var game:Main;
 	public var bullets:List<Bullet>;
+	public var enemies:List<Enemy>;
+	var counter:Int;
 
 	/* ENTRY POINT */
 	
@@ -57,6 +59,8 @@ class Main extends Sprite
 		super();
 		game = this;
 		bullets = new List<Bullet>();
+		enemies = new List<Enemy>();
+		counter = 0;
 		addEventListener(Event.ADDED_TO_STAGE, added);
 		//Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, move);
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, processKey);
@@ -64,16 +68,37 @@ class Main extends Sprite
 		Lib.current.stage.addEventListener(Event.ENTER_FRAME, doStuff);
 		ship = new Ship(400,400);
 		this.addChild(ship);
+		makeEnemies();
+		
+	}
+	
+	public function makeEnemies()
+	{
+		for ( i in 0...6 )
+		{
+			var enemy = new Enemy(Std.int(100+600/5*i), 100);
+			this.addChild(enemy);
+			enemies.add(enemy);
+		}
 	}
 	
 	function doStuff(e)
 	{
+		counter += 1;
 		if (leftDown) ship.left();
 		if (rightDown) ship.right();
 		
 		ship.act();
 		for (bullet in bullets) bullet.act();
 		trace(bullets.length);
+		for (enemy in enemies) enemy.act();
+		
+		if (enemies.length<8 && counter % 60 == 0)
+		{
+			var enemy = new Enemy(Std.int(Math.random()*600+100), 100);
+			this.addChild(enemy);
+			enemies.add(enemy);
+		}
 		
 	}
 	
