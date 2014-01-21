@@ -107,8 +107,7 @@ class Main extends Sprite
 		enemies = new List<Enemy>();
 		ship.reanimate();
 		makeEnemies();
-		Lib.current.stage.focus = this;
-		this.focusRect = false;
+		Lib.current.stage.focus = this.stage;
 	}
 	
 	public function playAgain_mouse(e:MouseEvent)
